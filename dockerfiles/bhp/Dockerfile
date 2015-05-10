@@ -1,5 +1,4 @@
 FROM debian:jessie
-# using debian jessie
 MAINTAINER "curtis@serverascode.com"
 # orig example: https://github.com/moul/docker-scapy/blob/master/Dockerfile
 
@@ -8,10 +7,11 @@ RUN apt-get update && \
     tcpdump telnet zip vim netcat lsof wget \
     gcc python-dev tcpdump graphviz imagemagick \
     swig python-crypto libpcap0.7 libpcap-dev \
-    python-pip ipython && \
+    python-pip ipython git && \
     apt-get clean
 
 RUN pip install -q numpy && \
+    pip install -q fusil && \
     pip install --allow-all-external \
     PyX==0.12.1 pycrypto \
     --allow-unverified gnuplot-py gnuplot-py
@@ -26,4 +26,7 @@ RUN wget http://www.nostarch.com/download/BHP-Code.zip && \
     rm -rf /__MACOSX && \
     rm -f /BHP-Code.zip
 
-ADD examples /examples
+RUN git clone https://github.com/sqlmapproject/sqlmap.git /opt/sqlmap
+RUN ln -s /opt/sqlmap/sqlmap.py /usr/local/bin/sqlmap
+
+COPY examples /examples

@@ -1,3 +1,7 @@
 BHP-Code
 NOTES.md
 docker_bash_aliases
+*.pyc
+dockerfiles/bhp/examples/drupalpass.py
+tmp
+dockerfiles/webgoat/files/
